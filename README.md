@@ -1,16 +1,13 @@
 # login_flutter_app
 
-A new Flutter project.
+## How to Create a Flutter Folder Structure for Maximum Efficiency | Coding with T
+https://www.youtube.com/watch?v=iWsfGf_UEXE&t=0s
 
-## Getting Started
+<img width="253" alt="スクリーンショット 2023-05-16 22 22 26" src="https://github.com/YamamotoDesu/login_flutter_app/assets/47273077/2a719cc0-ef33-4421-a8ed-84fa33d46150">
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+```
+➜  login_flutter_app cd packages/
+➜  packages flutter create --template package auth_repository
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
