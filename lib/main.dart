@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'src/utils/theme/theme.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,10 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      darkTheme: ThemeData(),
+      theme: TAppTheme.lightTheme,
+      darkTheme: TAppTheme.darkTheme,
+      themeMode: ThemeMode.system,
       home: const AppHome(),
     );
   }
@@ -45,9 +46,18 @@ class AppHome extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         child: ListView(
           children: [
-            const Text("Heading"),
-            const Text("Sub-heading"),
-            const Text("Paragraph"),
+            Text(
+              "Heading",
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+            Text(
+              "Sub-heading",
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
+            Text(
+              "Paragraph",
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
             ElevatedButton(
               onPressed: () {},
               child: const Text("Elevated Button"),
