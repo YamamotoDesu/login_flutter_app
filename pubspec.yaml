@@ -13,12 +13,27 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.4
+  flutter_native_splash: ^2.2.19
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
+
+flutter_native_splash:
+  color: "#f7f6f1"
+  color_dark: "#272727"
+  image: assets/images/splash_images/splash-screen-image.png
+  image_dark:  assets/images/splash_images/splash-screen-image.png
+
+  android_12:
+    background_color: "#f7f6f1"
+    background_color_dark: "#272727"
+    foreground_color: "#f7f6f1"
+    foreground_color_dark: "#272727"
+    image: assets/images/splash_images/splash-screen-image.png
+    image_dark: assets/images/splash_images/splash-screen-image.png
 
 flutter:
 
