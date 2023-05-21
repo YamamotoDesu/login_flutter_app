@@ -157,3 +157,200 @@ class App extends StatelessWidget {
     return GetMaterialApp(
   ```
 
+##  [Flutter Onboarding Screen | Flutter Liquid Swipe | Flutter Smooth Page Indicator [2023]](https://www.youtube.com/watch)
+
+https://github.com/YamamotoDesu/login_flutter_app/assets/47273077/272c7362-239a-4596-a5ac-79471925b2dd
+
+onboarding_screen.dart
+```dart
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:liquid_swipe/liquid_swipe.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../controllers/on_boarding_controller.dart';
+
+class OnBoaringScreen extends StatelessWidget {
+  OnBoaringScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final obController = OnBoardingConroller();
+
+    return Scaffold(
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          LiquidSwipe(
+            pages: obController.pages,
+            liquidController: obController.controller,
+            onPageChangeCallback: obController.onPageChangeCallback,
+            slideIconWidget: const Icon(Icons.arrow_back_ios),
+            enableSideReveal: true,
+          ),
+          Positioned(
+            bottom: 80.0,
+            child: OutlinedButton(
+              onPressed: obController.animateToNextSlide,
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                side: const BorderSide(color: Colors.black26),
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(10),
+              ),
+              child: Container(
+                padding: const EdgeInsets.all(20.0),
+                decoration: const BoxDecoration(
+                    color: Color(0xff272727), shape: BoxShape.circle),
+                child: const Icon(Icons.arrow_forward_ios),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 50,
+            right: 20,
+            child: TextButton(
+              onPressed: obController.skip,
+              child: const Text(
+                "Skip",
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 20.0,
+                ),
+              ),
+            ),
+          ),
+          Obx(
+            () => Positioned(
+              bottom: 30,
+              child: AnimatedSmoothIndicator(
+                activeIndex: obController.currentPage.value,
+                count: 3,
+                effect: const WormEffect(
+                  activeDotColor: Color(0xff272727),
+                  dotHeight: 5.0,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+on_boarding_page_widget.dart
+```dart
+import 'package:flutter/material.dart';
+
+import '../../../../constants/sizes.dart';
+import '../../../../constants/text_strings.dart';
+import '../../models/model_on_boarding.dart';
+
+class OnboaringScreenWidget extends StatelessWidget {
+  const OnboaringScreenWidget({
+    super.key,
+    required this.model,
+  });
+
+  final OnBoardingModel model;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      padding: const EdgeInsets.all(tDefaultSize),
+      color: model.bgColor,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Image(
+            image: AssetImage(
+              model.image,
+            ),
+            height: size.height * 0.4,
+          ),
+          Column(
+            children: [
+              Text(
+                model.title,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              Text(
+                model.subTitle,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          Text(
+            model.counterText,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          const SizedBox(
+            height: 80.0,
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+on_boarding_controller.dart
+```dart
+import 'package:get/get.dart';
+import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
+
+import '../../../constants/colors.dart';
+import '../../../constants/image_strings.dart';
+import '../../../constants/text_strings.dart';
+import '../models/model_on_boarding.dart';
+import '../screens/on_boarding/on_boarding_page_widget.dart';
+
+class OnBoardingConroller extends GetxController {
+  final controller = LiquidController();
+  RxInt currentPage = 0.obs;
+
+  final pages = [
+    OnboaringScreenWidget(
+      model: OnBoardingModel(
+        image: tOnBoardingImage1,
+        title: tOnBoardingTitle1,
+        subTitle: tOnBoardingSubTitle1,
+        counterText: tOnBoardingCounter1,
+        bgColor: tOnBoardingPage1Color,
+      ),
+    ),
+    OnboaringScreenWidget(
+      model: OnBoardingModel(
+        image: tOnBoardingImage2,
+        title: tOnBoardingTitle2,
+        subTitle: tOnBoardingSubTitle2,
+        counterText: tOnBoardingCounter2,
+        bgColor: tOnBoardingPage2Color,
+      ),
+    ),
+    OnboaringScreenWidget(
+      model: OnBoardingModel(
+        image: tOnBoardingImage3,
+        title: tOnBoardingTitle3,
+        subTitle: tOnBoardingSubTitle3,
+        counterText: tOnBoardingCounter3,
+        bgColor: tOnBoardingPage3Color,
+      ),
+    ),
+  ];
+  
+  animateToNextSlide() {
+    int nextPage = controller.currentPage + 1;
+    controller.animateToPage(page: nextPage);
+  }
+
+  void onPageChangeCallback(int activePageIndex) {
+    currentPage.value = activePageIndex;
+  }
+
+  skip() => controller.jumpToPage(page: 2);
+}
+```
