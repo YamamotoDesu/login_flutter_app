@@ -22,7 +22,7 @@ class TAppTheme {
         900: Color(0xFFFF6F00),
       },
     ),
-    textTheme: TTextThenme.lightTextTheme,
+    textTheme: TTextTheme.lightTextTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -42,6 +42,6 @@ class TAppTheme {
         900: Color(0xFFFF6F00),
       },
     ),
-    textTheme: TTextThenme.darkTextTheme,
+    textTheme: TTextTheme.darkTextTheme,
   );
 }
