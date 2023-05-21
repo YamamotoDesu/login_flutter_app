@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:login_flutter_app/src/features/authentication/screens/authentications/screens/welcome/welcome/welcome_screen.dart';
+
+import '../screens/on_boarding/onboarding_screen.dart';
 
 class SplashScreenController extends GetxController {
   static SplashScreenController get find => Get.find();
@@ -10,7 +11,7 @@ class SplashScreenController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 500));
     animate.value = true;
     await Future.delayed(const Duration(milliseconds: 5000));
-    Get.to(const WelcomeScreen());
+    Get.to(OnBoaringScreen());
     //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const WelcomeScreen()));
   }
 }
