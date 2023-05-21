@@ -3,10 +3,11 @@ import 'package:get/get.dart';
 import 'package:login_flutter_app/src/constants/colors.dart';
 import 'package:login_flutter_app/src/constants/image_strings.dart';
 import 'package:login_flutter_app/src/constants/text_strings.dart';
-import 'package:login_flutter_app/src/features/authentication/screens/authentications/controllers/splash_controller.dart';
 
-import '../../../../../../constants/sizes.dart';
-import '../welcome/welcome/welcome_screen.dart';
+import '../../../../constants/sizes.dart';
+import '../../controllers/splash_controller.dart';
+
+
 
 class SplashScreen extends StatelessWidget {
   SplashScreen({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login_flutter_app/src/features/authentication/screens/authentications/screens/splash_screen/splash_screen.dart';
 
+import 'src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'src/utils/theme/theme.dart';
 
 void main() {
