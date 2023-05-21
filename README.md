@@ -40,3 +40,106 @@ flutter_native_splash:
 ```
 ➜  login_flutter_app git:(main) ✗ flutter pub run flutter_native_splash:crea
 ```
+
+## [Flutter Splash Screen tutorial with animation | Splash Screen 2023](https://www.youtube.com/watch)
+
+https://github.com/YamamotoDesu/login_flutter_app/assets/47273077/cba7db02-a569-457d-93bf-713c56ac3c41
+
+splash_screen.dart
+```dart
+class SplashScreen extends StatelessWidget {
+  SplashScreen({super.key});
+
+  final splashController = Get.put(SplashScreenController());
+
+  @override
+  Widget build(BuildContext context) {
+    splashController.startAnimation();
+    return Scaffold(
+      body: Stack(
+        children: [
+          Obx(() => AnimatedPositioned(
+              duration: const Duration(milliseconds: 1600),
+              top: splashController.animate.value ? 0 : -30,
+              left: splashController.animate.value ? 0 : -30,
+              child: const Image(
+                image: AssetImage(
+                  tSplashTopIcon,
+                ),
+              ),
+            ),
+          ),
+          Obx(() => AnimatedPositioned(
+              duration: const Duration(milliseconds: 1600),
+              top: 80,
+              left: splashController.animate.value ? tDefaultSize : -80,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 400),
+                opacity: splashController.animate.value ? 1 : 0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      tAppName,
+                      style: Theme.of(context).textTheme.headlineLarge,
+                    ),
+                    Text(
+                      tAppTagLine,
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Obx(() => AnimatedPositioned(
+              duration: const Duration(milliseconds: 2400),
+              bottom: splashController.animate.value ? 100 : 0,
+              child: const Image(
+                image: AssetImage(
+                  tSplashImage,
+                ),
+              ),
+            ),
+          ),
+          Obx(() => AnimatedPositioned(
+              duration: const Duration(milliseconds: 2400),
+              bottom: splashController.animate.value ? 40 : 0,
+              right: tDefaultSize,
+              child: Container(
+                width: tSplashContainerSize,
+                height: tSplashContainerSize,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: tPrimaryColor,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+splash_controller.dart
+```dart
+import 'package:get/get.dart';
+import 'package:login_flutter_app/src/features/authentication/screens/authentications/screens/welcome/welcome/welcome_screen.dart';
+
+class SplashScreenController extends GetxController {
+  static SplashScreenController get find => Get.find();
+
+  RxBool animate = false.obs;
+
+  Future startAnimation() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    animate.value = true;
+    await Future.delayed(const Duration(milliseconds: 5000));
+    Get.to(const WelcomeScreen());
+    //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const WelcomeScreen()));
+  }
+}
+```
+
