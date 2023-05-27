@@ -14,7 +14,7 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   final controller = Get.put(FadeInAnimationController());
+    final controller = Get.put(FadeInAnimationController());
     controller.startAnimation();
 
     var mdeiaQuery = MediaQuery.of(context);
@@ -42,7 +42,9 @@ class WelcomeScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image(image: AssetImage(tWelcomeScreenImage), height: height * 0.6),
+                  Image(
+                      image: AssetImage(tWelcomeScreenImage),
+                      height: height * 0.6),
                   Column(
                     children: [
                       Text(
