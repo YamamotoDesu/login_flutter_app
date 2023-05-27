@@ -36,11 +36,6 @@ class TFadeInAnimation extends StatelessWidget {
           duration: Duration(milliseconds: durationInMs),
           opacity: controller.animate.value ? 1 : 0,
           child: child,
-          // child: const Image(
-          //   image: AssetImage(
-          //     tSplashTopIcon,
-          //   ),
-          // ),
         ),
       ),
     );
