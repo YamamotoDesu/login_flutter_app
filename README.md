@@ -354,3 +354,162 @@ class OnBoardingConroller extends GetxController {
   skip() => controller.jumpToPage(page: 2);
 }
 ```
+
+##  Welcome Screen | Flutter Login UI | Flutter UI | 2023
+<img width="300" alt="image" src="https://github.com/YamamotoDesu/login_flutter_app/assets/47273077/bdeb4cb3-79e9-441a-ac3a-4c12f4f0b6ab">
+
+welcome_screen.dart
+```dart
+import 'package:flutter/material.dart';
+import 'package:login_flutter_app/src/constants/colors.dart';
+import 'package:login_flutter_app/src/constants/image_strings.dart';
+import 'package:login_flutter_app/src/constants/sizes.dart';
+import 'package:login_flutter_app/src/constants/text_strings.dart';
+
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var mdeiaQuery = MediaQuery.of(context);
+    var brightness = mdeiaQuery.platformBrightness;
+    var height = mdeiaQuery.size.height;
+    final isDarkMode = brightness == Brightness.dark;
+    return Scaffold(
+      backgroundColor: isDarkMode ? tSecondaryColor : tPrimaryColor,
+      body: Container(
+        padding: const EdgeInsets.all(tDefaultSize),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image(image: AssetImage(tWelcomeScreenImage), height: height * 0.6),
+            Column(
+              children: [
+                Text(
+                  tWelcomeTitle,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                Text(
+                  tWelcomeSubTitle,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    child: Text(
+                      tLogin.toUpperCase(),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      tSignup.toUpperCase(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+outlined_button_theme.dart
+```dart
+import 'package:flutter/material.dart';
+
+import '../../../constants/colors.dart';
+import '../../../constants/sizes.dart';
+
+class TOutlinedButtonTheme {
+  TOutlinedButtonTheme._(); //To avoid creating instances
+
+  /* -- Light Elevated Button Theme -- */
+  static final lightElevatedButtonTheme = OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+        shape: const RoundedRectangleBorder(),
+        foregroundColor: tSecondaryColor,
+        side: const BorderSide(color: tSecondaryColor),
+        padding: const EdgeInsets.symmetric(vertical: tButtonHeight)),
+  );
+
+  /* -- Dark Elevated Button Theme -- */
+  static final darkElevatedButtonTheme = OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+        shape: const RoundedRectangleBorder(),
+        foregroundColor: tWhiteColor,
+        side: const BorderSide(color: tWhiteColor),
+        padding: const EdgeInsets.symmetric(vertical: tButtonHeight)),
+  );
+}
+```
+
+elevated_button_theme.dart
+```dart
+import 'package:flutter/material.dart';
+
+import '../../../constants/colors.dart';
+import '../../../constants/sizes.dart';
+
+class TElevatedButtonTheme {
+  TElevatedButtonTheme._(); //To avoid creating instances
+
+  /* -- Light Elevated Button Theme -- */
+  static final lightElevatedButtonTheme = ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      elevation: 0,
+      shape: const RoundedRectangleBorder(),
+      foregroundColor: tWhiteColor,
+      backgroundColor: tSecondaryColor,
+      side: const BorderSide(color: tSecondaryColor),
+      padding: const EdgeInsets.symmetric(vertical: tButtonHeight),
+    ),
+  );
+
+  /* -- Dark Elevated Button Theme -- */
+  static final darkElevatedButtonTheme = ElevatedButtonThemeData(
+     style: ElevatedButton.styleFrom(
+      elevation: 0,
+      shape: const RoundedRectangleBorder(),
+      foregroundColor: tSecondaryColor,
+      backgroundColor: tWhiteColor,
+      side: const BorderSide(color: tSecondaryColor),
+      padding: const EdgeInsets.symmetric(vertical: tButtonHeight),
+    ),
+  );
+}
+```
+
+theme.dart
+```dart
+class TAppTheme {
+
+  TAppTheme._();
+
+  static ThemeData lightTheme = ThemeData(
+    brightness: Brightness.light,
+    textTheme: TTextTheme.lightTextTheme,
+    outlinedButtonTheme: TOutlinedButtonTheme.lightElevatedButtonTheme,
+    elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
+  );
+
+  static ThemeData darkTheme = ThemeData(
+    textTheme: TTextTheme.darkTextTheme,
+    outlinedButtonTheme: TOutlinedButtonTheme.darkElevatedButtonTheme,
+    elevatedButtonTheme: TElevatedButtonTheme.darkElevatedButtonTheme,
+  );
+}
+```
