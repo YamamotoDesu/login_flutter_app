@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:login_flutter_app/src/utils/theme/widget_theme/elevated_button_theme.dart';
+import 'package:login_flutter_app/src/utils/theme/widget_theme/outlined_button_theme.dart';
 import 'package:login_flutter_app/src/utils/theme/widget_theme/text_theme.dart';
 
 class TAppTheme {
@@ -23,6 +25,8 @@ class TAppTheme {
       },
     ),
     textTheme: TTextTheme.lightTextTheme,
+    outlinedButtonTheme: TOutlinedButtonTheme.lightElevatedButtonTheme,
+    elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -43,5 +47,7 @@ class TAppTheme {
       },
     ),
     textTheme: TTextTheme.darkTextTheme,
+    outlinedButtonTheme: TOutlinedButtonTheme.darkElevatedButtonTheme,
+    elevatedButtonTheme: TElevatedButtonTheme.darkElevatedButtonTheme,
   );
 }
