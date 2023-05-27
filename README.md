@@ -513,3 +513,10 @@ class TAppTheme {
   );
 }
 ```
+
+## [Animate any widget in flutter](https://youtu.be/0orluUfFawI)
+
+https://github.com/YamamotoDesu/login_flutter_app/assets/47273077/7670554f-f0f8-4e22-bfb6-9e13e3762bbe
+
+
+
