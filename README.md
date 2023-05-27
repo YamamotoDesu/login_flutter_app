@@ -513,3 +513,149 @@ class TAppTheme {
   );
 }
 ```
+
+## [Animate any widget in flutter](https://youtu.be/0orluUfFawI)
+
+https://github.com/YamamotoDesu/login_flutter_app/assets/47273077/7670554f-f0f8-4e22-bfb6-9e13e3762bbe
+
+fade_in_animation_model.dart
+```dart
+
+class TAnimatePositon{
+  final double? topBefore, bottomBefore, leftBefore, rightBefore;
+  final double? topAfter, bottomAfter, leftAfter, rightAfter;
+
+  TAnimatePositon({
+    this.topBefore,
+    this.bottomBefore,
+    this.leftBefore,
+    this.rightBefore,
+    this.topAfter,
+    this.bottomAfter,
+    this.leftAfter,
+    this.rightAfter,
+  });
+}
+```
+
+animation_design.dart
+```dart
+class TFadeInAnimation extends StatelessWidget {
+  TFadeInAnimation({
+    super.key,
+    required this.durationInMs,
+    required this.child,
+    this.animate,
+  });
+
+  final controller = Get.put(FadeInAnimationController());
+  final int durationInMs;
+  final TAnimatePositon? animate;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => AnimatedPositioned(
+        duration: Duration(milliseconds: durationInMs),
+        top: controller.animate.value ? animate!.topAfter : animate!.topBefore,
+        left:
+            controller.animate.value ? animate!.leftAfter : animate!.leftAfter,
+        bottom: controller.animate.value
+            ? animate!.bottomAfter
+            : animate!.bottomBefore,
+        right: controller.animate.value
+            ? animate!.rightAfter
+            : animate!.rightBefore,
+        child: AnimatedOpacity(
+          duration: Duration(milliseconds: durationInMs),
+          opacity: controller.animate.value ? 1 : 0,
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+```
+
+fade_in_animation_controller.dart
+```dart
+class FadeInAnimationController extends GetxController {
+  static FadeInAnimationController get find => Get.find();
+
+  RxBool animate = false.obs;
+
+  Future startSplashAnimation() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    animate.value = true;
+    await Future.delayed(const Duration(milliseconds: 3000));
+    animate.value = false;
+    await Future.delayed(const Duration(milliseconds: 2000));
+    Get.offAll(const WelcomeScreen());
+  }
+
+  Future startAnimation() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    animate.value = true;
+  }
+}
+```
+
+splash_screen.dart
+```dart
+  Widget build(BuildContext context) {
+    final controller = Get.put(FadeInAnimationController());
+    controller.startSplashAnimation();
+
+    return Scaffold(
+      body: Stack(
+        children: [
+          TFadeInAnimation(
+            durationInMs: 1600,
+            animate: TAnimatePositon(
+              topAfter: 0,
+              topBefore: -30,
+              leftAfter: -30,
+              leftBefore: 0,
+            ),
+            child: const Image(
+              image: AssetImage(
+                tSplashTopIcon,
+              ),
+            ),
+          ),
+```
+
+welcome_screen.dart
+```dart
+
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+   final controller = Get.put(FadeInAnimationController());
+    controller.startAnimation();
+
+    var mdeiaQuery = MediaQuery.of(context);
+    var brightness = mdeiaQuery.platformBrightness;
+    var height = mdeiaQuery.size.height;
+    final isDarkMode = brightness == Brightness.dark;
+    return Scaffold(
+      backgroundColor: isDarkMode ? tSecondaryColor : tPrimaryColor,
+      body: Stack(
+        children: [
+          TFadeInAnimation(
+            durationInMs: 1200,
+            animate: TAnimatePositon(
+              bottomAfter: 0,
+              bottomBefore: -100,
+              leftBefore: 0,
+              leftAfter: 0,
+              topAfter: 0,
+              topBefore: 0,
+              rightAfter: 0,
+              rightBefore: 0,
+            ),
+            child: Container(
+            
